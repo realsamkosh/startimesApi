@@ -3,7 +3,7 @@ using Startimes.Data.DataObjects.Startimes;
 
 namespace Startimes.Service.Modules.StartTimes.Interface
 {
-    public interface IStartimesApiService
+    public interface IStartimesPaymentApiService
     {
         ResponseModel<ServiceStatusViewModel> ServiceStatus();
     }

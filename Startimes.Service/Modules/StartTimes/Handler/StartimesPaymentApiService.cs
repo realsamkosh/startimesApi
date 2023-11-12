@@ -10,12 +10,12 @@ using System.Runtime;
 
 namespace Startimes.Service.Modules.StartTimes.Handler
 {
-    public class StartimesApiService : IStartimesApiService
+    public class StartimesPaymentApiService : IStartimesPaymentApiService
     {
         private readonly GlobalConfig _settings;
-        private readonly ILogger<StartimesApiService> _logger;
+        private readonly ILogger<StartimesPaymentApiService> _logger;
 
-        public StartimesApiService(IOptions<GlobalConfig> settings, ILogger<StartimesApiService> logger)
+        public StartimesPaymentApiService(IOptions<GlobalConfig> settings, ILogger<StartimesPaymentApiService> logger)
         {
             _settings = settings.Value;
             _logger = logger;
