@@ -64,7 +64,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 return responseModel;
             }
         }
-        public ResponseModel<SubscriberRechargeViewModel> QuerySubscriberRechargeInfo(string serviceCode)
+        public ResponseModel<SubscriberRechargeViewModel> QueryRechargeInfo(string serviceCode)
         {
             ResponseModel<SubscriberRechargeViewModel> responseModel = new();
             try
@@ -97,6 +97,52 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 responseModel.success = false;
                 responseModel.data = null;
                 responseModel.message = "Validation FAILED";
+                responseModel.code = ErrorCodes.Failed;
+                return responseModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Verification Failed", ex);
+                responseModel.success = false;
+                responseModel.data = null;
+                responseModel.message = ex.Message;
+                responseModel.code = ErrorCodes.Failed;
+                return responseModel;
+            }
+        }
+        public ResponseModel<SubscriberReplaceablePackageViewModel> QueryReplaceablePackage(string serviceCode)
+        {
+            ResponseModel<SubscriberReplaceablePackageViewModel> responseModel = new();
+            try
+            {
+                var client = new RestClient($"http://{_settings.StartimeSettings.IPAddress}:{_settings.StartimeSettings.Port}/api-payment-service/v1/subscribers/{serviceCode}/replaceable-packages");
+                var request = new RestRequest();
+                request.AddHeader("co", $"{_settings.StartimeSettings.Co}");
+                request.AddHeader("accept", "application/json");
+                request.AddHeader("content-type", "application/json");
+                RestResponse response = client.ExecutePostAsync(request).GetAwaiter().GetResult();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = JsonConvert.DeserializeObject<SubscriberReplaceablePackageViewModel>(response?.Content);
+                    responseModel.success = true;
+                    responseModel.data = result;
+                    responseModel.code = ErrorCodes.Successful;
+                    return responseModel;
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var errorResult1 = JsonConvert.DeserializeObject<string>(response.Content);
+                    responseModel.success = false;
+                    responseModel.data = null;
+                    responseModel.message = errorResult1;
+                    responseModel.code = ErrorCodes.Failed;
+                    return responseModel;
+                }
+                var errorResult = JsonConvert.DeserializeObject<string>(response.Content);
+                responseModel.success = false;
+                responseModel.data = null;
+                responseModel.message = errorResult;
                 responseModel.code = ErrorCodes.Failed;
                 return responseModel;
             }

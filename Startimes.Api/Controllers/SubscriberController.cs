@@ -32,6 +32,7 @@ namespace Startimes.Api.Controllers
                 success = result.success,
             });
         }
+
         [HttpGet("recharge-info/{serviceCode}")]
         public IActionResult RechargeInfos(string serviceCode)
         {
@@ -40,7 +41,25 @@ namespace Startimes.Api.Controllers
                 NotifyModelStateError();
             }
 
-            var result = _subscriberService.QuerySubscriberRechargeInfo(serviceCode);
+            var result = _subscriberService.QueryRechargeInfo(serviceCode);
+            return Response(new ResponseModel
+            {
+                code = result.code,
+                message = result.message,
+                data = result.data,
+                success = result.success,
+            });
+        }
+
+        [HttpGet("replaceable-packages/{serviceCode}")]
+        public IActionResult ReplaceablePackages(string serviceCode)
+        {
+            if (!ModelState.IsValid)
+            {
+                NotifyModelStateError();
+            }
+
+            var result = _subscriberService.QueryReplaceablePackage(serviceCode);
             return Response(new ResponseModel
             {
                 code = result.code,
