@@ -5,9 +5,7 @@ using RestSharp;
 using RPNL.Net.Utilities.ResponseUtil;
 using Startimes.Data.DataObjects;
 using Startimes.Data.DataObjects.Startimes;
-using Startimes.Data.DataObjects.Startimes.Subscriber;
 using Startimes.Service.Modules.StartTimes.Interface;
-using System.Runtime;
 
 namespace Startimes.Service.Modules.StartTimes.Handler
 {
@@ -27,12 +25,15 @@ namespace Startimes.Service.Modules.StartTimes.Handler
             ResponseModel<ServiceStatusViewModel> responseModel = new();
             try
             {
-                var client = new RestClient($"http://{_settings.StartimeSettings.IPAddress}:{_settings.StartimeSettings.Port}/api-payment-service/v1/service-status");
+                var client = new RestClient($"{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/service-status");
                 var request = new RestRequest();
+                // Add Basic Authentication header
+                string credentials = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{_settings.StartimeSettings.Username}:{_settings.StartimeSettings.Password}"));
+                request.AddHeader("Authorization", $"Basic {credentials}");
                 request.AddHeader("co", $"{_settings.StartimeSettings.Co}");
                 request.AddHeader("accept", "application/json");
                 request.AddHeader("content-type", "application/json");
-                RestResponse response = client.ExecutePostAsync(request).GetAwaiter().GetResult();
+                RestResponse response = client.ExecuteGetAsync(request).GetAwaiter().GetResult();
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -44,9 +45,9 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
-                    var errorResult = JsonConvert.DeserializeObject<ServiceStatusViewModel>(response.Content);
+                    var errorResult = JsonConvert.DeserializeObject<string>(response.Content);
                     responseModel.success = false;
-                    responseModel.data = errorResult;
+                    responseModel.message = errorResult;
                     responseModel.code = ErrorCodes.Failed;
                     return responseModel;
                 }
@@ -55,6 +56,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 responseModel.data = null;
                 responseModel.message = "Validation FAILED";
                 responseModel.code = ErrorCodes.Failed;
+                responseModel.success = false;
                 return responseModel;
             }
             catch (Exception ex)

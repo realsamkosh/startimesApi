@@ -9,8 +9,8 @@ namespace Startimes.Data.DataObjects.Startimes
     public class StartimeSettings
     {
         public string? Co { get; set; }
-        public string? IPAddress { get; set; }
-        public string? Host { get; set; }
-        public string? Port { get; set; }
+        public string? BaseUrl { get; set; }
+        public string? Username { get; set; }
+        public string? Password { get; set; }
     }
 }

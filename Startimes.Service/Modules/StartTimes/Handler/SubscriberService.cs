@@ -24,7 +24,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
             ResponseModel<SubscriberViewModel> responseModel = new();
             try
             {
-                var client = new RestClient($"http://{_settings.StartimeSettings.IPAddress}:{_settings.StartimeSettings.Port}/api-payment-service/v1/subscribers/{serviceCode}");
+                var client = new RestClient($"http://{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/subscribers/{serviceCode}");
                 var request = new RestRequest();
                 request.AddHeader("co", $"{_settings.StartimeSettings.Co}");
                 request.AddHeader("accept", "application/json");
@@ -41,13 +41,13 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
-                    var errorResult = JsonConvert.DeserializeObject<SubscriberViewModel>(response.Content);
+                    var errorResult1 = JsonConvert.DeserializeObject<string>(response.Content);
                     responseModel.success = false;
-                    responseModel.data = errorResult;
+                    responseModel.message = errorResult1;
                     responseModel.code = ErrorCodes.Failed;
                     return responseModel;
                 }
-
+                var errorResult = JsonConvert.DeserializeObject<string>(response.Content);
                 responseModel.success = false;
                 responseModel.data = null;
                 responseModel.message = "Validation FAILED";
@@ -69,7 +69,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
             ResponseModel<SubscriberRechargeViewModel> responseModel = new();
             try
             {
-                var client = new RestClient($"http://{_settings.StartimeSettings.IPAddress}:{_settings.StartimeSettings.Port}/api-payment-service/v1/subscribers/{serviceCode}/recharge-infos");
+                var client = new RestClient($"http://{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/subscribers/{serviceCode}/recharge-infos");
                 var request = new RestRequest();
                 request.AddHeader("co", $"{_settings.StartimeSettings.Co}");
                 request.AddHeader("accept", "application/json");
@@ -115,7 +115,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
             ResponseModel<SubscriberReplaceablePackageViewModel> responseModel = new();
             try
             {
-                var client = new RestClient($"http://{_settings.StartimeSettings.IPAddress}:{_settings.StartimeSettings.Port}/api-payment-service/v1/subscribers/{serviceCode}/replaceable-packages");
+                var client = new RestClient($"http://{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/subscribers/{serviceCode}/replaceable-packages");
                 var request = new RestRequest();
                 request.AddHeader("co", $"{_settings.StartimeSettings.Co}");
                 request.AddHeader("accept", "application/json");
