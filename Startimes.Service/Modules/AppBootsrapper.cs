@@ -12,6 +12,7 @@ namespace Startimes.Service.Modules
 
 
             services.AddScoped<IStartimesPaymentApiService, StartimesPaymentApiService>();
+            services.AddScoped<ISubscriberService, SubscriberService>();
         }
     }
 }

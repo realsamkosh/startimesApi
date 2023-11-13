@@ -5,6 +5,7 @@ using RestSharp;
 using RPNL.Net.Utilities.ResponseUtil;
 using Startimes.Data.DataObjects;
 using Startimes.Data.DataObjects.Startimes;
+using Startimes.Data.DataObjects.Startimes.Subscriber;
 using Startimes.Service.Modules.StartTimes.Interface;
 using System.Runtime;
 
@@ -66,5 +67,6 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 return responseModel;
             }
         }
+
     }
 }
