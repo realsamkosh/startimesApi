@@ -9,12 +9,12 @@ using Startimes.Service.Modules.StartTimes.Interface;
 
 namespace Startimes.Service.Modules.StartTimes.Handler
 {
-    public class StartimesPaymentApiService : IStartimesPaymentApiService
+    public class StatusService : IStatusService
     {
         private readonly GlobalConfig _settings;
-        private readonly ILogger<StartimesPaymentApiService> _logger;
+        private readonly ILogger<StatusService> _logger;
 
-        public StartimesPaymentApiService(IOptions<GlobalConfig> settings, ILogger<StartimesPaymentApiService> logger)
+        public StatusService(IOptions<GlobalConfig> settings, ILogger<StatusService> logger)
         {
             _settings = settings.Value;
             _logger = logger;
@@ -43,20 +43,11 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                     responseModel.code = ErrorCodes.Successful;
                     return responseModel;
                 }
-                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-                {
-                    var errorResult = JsonConvert.DeserializeObject<string>(response.Content);
-                    responseModel.success = false;
-                    responseModel.message = errorResult;
-                    responseModel.code = ErrorCodes.Failed;
-                    return responseModel;
-                }
 
+                var errorResult = JsonConvert.DeserializeObject<StartimeErrorViewModel>(response.Content);
                 responseModel.success = false;
-                responseModel.data = null;
-                responseModel.message = "Validation FAILED";
+                responseModel.message = errorResult.ErrorCode;
                 responseModel.code = ErrorCodes.Failed;
-                responseModel.success = false;
                 return responseModel;
             }
             catch (Exception ex)

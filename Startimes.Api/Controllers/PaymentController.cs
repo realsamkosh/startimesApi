@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RPNL.Net.Utilities.ResponseUtil;
 using Startimes.Service.Modules.StartTimes.Interface;
 
@@ -9,9 +8,9 @@ namespace Startimes.Api.Controllers
     [ApiController]
     public class PaymentController : BaseController
     {
-        private readonly IStartimesPaymentApiService _paymentApiService;
+        private readonly IStatusService _paymentApiService;
 
-        public PaymentController(IStartimesPaymentApiService  paymentApiService)
+        public PaymentController(IStatusService  paymentApiService)
         {
             _paymentApiService = paymentApiService;
         }

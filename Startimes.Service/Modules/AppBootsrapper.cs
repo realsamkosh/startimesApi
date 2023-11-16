@@ -11,8 +11,9 @@ namespace Startimes.Service.Modules
             // ASP.NET HttpContext dependency
 
 
-            services.AddScoped<IStartimesPaymentApiService, StartimesPaymentApiService>();
+            services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<ISubscriberService, SubscriberService>();
+            services.AddScoped<IRechargeService, RechargeService>();
         }
     }
 }

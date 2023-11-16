@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startimes.Api", "Startimes.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startimes.Service", "Startimes.Service\Startimes.Service.csproj", "{DC03941C-C58C-4AEF-83AF-58A981AFE020}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startimes.Data", "Startimes.Data\Startimes.Data.csproj", "{D064A741-8F47-4235-B129-BE6AED453915}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startimes.Data", "Startimes.Data\Startimes.Data.csproj", "{D064A741-8F47-4235-B129-BE6AED453915}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startimes.Utility", "Startimes.Utility\Startimes.Utility.csproj", "{FECFE8BB-74AB-4F37-8183-66F4DB2650DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D064A741-8F47-4235-B129-BE6AED453915}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D064A741-8F47-4235-B129-BE6AED453915}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D064A741-8F47-4235-B129-BE6AED453915}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FECFE8BB-74AB-4F37-8183-66F4DB2650DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FECFE8BB-74AB-4F37-8183-66F4DB2650DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FECFE8BB-74AB-4F37-8183-66F4DB2650DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FECFE8BB-74AB-4F37-8183-66F4DB2650DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

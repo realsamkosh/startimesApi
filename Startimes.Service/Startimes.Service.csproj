@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Startimes.Data\Startimes.Data.csproj" />
+    <ProjectReference Include="..\Startimes.Utility\Startimes.Utility.csproj" />
   </ItemGroup>
 
 </Project>
