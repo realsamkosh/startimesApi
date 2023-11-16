@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Startimes.Data.DataObjects.Startimes.Recharge
+namespace Startimes.Data.DataObjects.Recharge
 {
     public class PackageRechargeInfoViewModel
     {

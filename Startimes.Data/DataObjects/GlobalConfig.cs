@@ -1,4 +1,4 @@
-﻿using Startimes.Data.DataObjects.Startimes;
+﻿using Startimes.Data.DataObjects.Common;
 
 namespace Startimes.Data.DataObjects
 {

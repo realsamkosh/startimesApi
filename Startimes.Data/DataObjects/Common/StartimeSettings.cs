@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Startimes.Data.DataObjects.Startimes
+namespace Startimes.Data.DataObjects.Common
 {
     public class StartimeSettings
     {

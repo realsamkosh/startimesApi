@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 using RestSharp;
 using RPNL.Net.Utilities.ResponseUtil;
 using Startimes.Data.DataObjects;
-using Startimes.Data.DataObjects.Startimes;
-using Startimes.Data.DataObjects.Startimes.Subscriber;
+using Startimes.Data.DataObjects.Common;
+using Startimes.Data.DataObjects.Subscriber;
 using Startimes.Service.Modules.StartTimes.Interface;
 
 namespace Startimes.Service.Modules.StartTimes.Handler

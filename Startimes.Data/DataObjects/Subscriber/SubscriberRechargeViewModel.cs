@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Startimes.Data.DataObjects.Startimes.Subscriber
+namespace Startimes.Data.DataObjects.Subscriber
 {
     public class SubscriberRechargeViewModel
     {

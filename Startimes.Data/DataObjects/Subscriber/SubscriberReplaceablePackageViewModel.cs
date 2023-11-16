@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Startimes.Data.DataObjects.Startimes.Subscriber
+namespace Startimes.Data.DataObjects.Subscriber
 {
     public class SubscriberReplaceablePackageViewModel
     {

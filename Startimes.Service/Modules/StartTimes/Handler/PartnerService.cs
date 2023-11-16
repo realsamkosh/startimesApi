@@ -5,29 +5,29 @@ using RestSharp;
 using RPNL.Net.Utilities.ResponseUtil;
 using Startimes.Data.DataObjects;
 using Startimes.Data.DataObjects.Common;
-using Startimes.Data.DataObjects.Recharge;
+using Startimes.Data.DataObjects.Partner;
 using Startimes.Service.Modules.StartTimes.Interface;
 using Startimes.Utility;
 
 namespace Startimes.Service.Modules.StartTimes.Handler
 {
-    public class RechargeService : IRechargeService
+    public class PartnerService : IPartnerService
     {
         private readonly GlobalConfig _settings;
-        private readonly ILogger<RechargeService> _logger;
+        private readonly ILogger<PartnerService> _logger;
 
-        public RechargeService(IOptions<GlobalConfig> settings, ILogger<RechargeService> logger)
+        public PartnerService(IOptions<GlobalConfig> settings, ILogger<PartnerService> logger)
         {
             _settings = settings.Value;
             _logger = logger;
         }
 
-        public ResponseModel<RechargeViewModel> Recharge(RechargeDto model)
+        public ResponseModel<PartnerBalanceViewModel> GetPartnersAccounts()
         {
-            ResponseModel<RechargeViewModel> responseModel = new();
+            ResponseModel<PartnerBalanceViewModel> responseModel = new();
             try
             {
-                var client = new RestClient($"{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/recharging");
+                var client = new RestClient($"{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/partners/accounts");
                 var request = new RestRequest();
                 // Add Basic Authentication header
                 string credentials = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{_settings.StartimeSettings.Username}:{_settings.StartimeSettings.Password}"));
@@ -35,12 +35,11 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 request.AddHeader("co", $"{_settings.StartimeSettings.Co}");
                 request.AddHeader("accept", "application/json");
                 request.AddHeader("content-type", "application/json");
-                request.AddJsonBody(model);
-                RestResponse response = client.ExecutePostAsync(request).GetAwaiter().GetResult();
+                RestResponse response = client.ExecuteGetAsync(request).GetAwaiter().GetResult();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JsonConvert.DeserializeObject<RechargeViewModel>(response?.Content);
+                    var result = JsonConvert.DeserializeObject<PartnerBalanceViewModel>(response?.Content);
                     responseModel.success = true;
                     responseModel.data = result;
                     responseModel.code = ErrorCodes.Successful;
@@ -51,7 +50,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                     var errorResult = JsonConvert.DeserializeObject<StartimeErrorViewModel>(response.Content);
                     responseModel.success = false;
                     responseModel.data = null;
-                    responseModel.message = errorResult.ErrorCode;
+                    responseModel.message = ErrorMessages.GetStartTimesErrorMessage(errorResult.ErrorCode);
                     responseModel.code = ErrorCodes.Failed;
                     return responseModel;
                 }
@@ -66,12 +65,12 @@ namespace Startimes.Service.Modules.StartTimes.Handler
                 return responseModel;
             }
         }
-        public ResponseModel<List<PackageRechargeInfoViewModel>> GetPackageRechargeInfo(string code)
+        public ResponseModel<PartnerTransactionsViewModel> GetPartnersTransactions(string serialNo)
         {
-            ResponseModel<List<PackageRechargeInfoViewModel>> responseModel = new();
+            ResponseModel<PartnerTransactionsViewModel> responseModel = new();
             try
             {
-                var client = new RestClient($"{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/packages/{code}/recharge-infos");
+                var client = new RestClient($"{_settings.StartimeSettings.BaseUrl}/api-payment-service/v1/partners/transactions/{serialNo}");
                 var request = new RestRequest();
                 // Add Basic Authentication header
                 string credentials = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{_settings.StartimeSettings.Username}:{_settings.StartimeSettings.Password}"));
@@ -83,7 +82,7 @@ namespace Startimes.Service.Modules.StartTimes.Handler
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JsonConvert.DeserializeObject<List<PackageRechargeInfoViewModel>>(response?.Content);
+                    var result = JsonConvert.DeserializeObject<PartnerTransactionsViewModel>(response?.Content);
                     responseModel.success = true;
                     responseModel.data = result;
                     responseModel.code = ErrorCodes.Successful;

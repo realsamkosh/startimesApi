@@ -1,7 +1,7 @@
 ﻿using RPNL.Net.Utilities.ResponseUtil;
-using Startimes.Data.DataObjects.Startimes.Recharge;
+using Startimes.Data.DataObjects.Recharge;
 
-namespace Startimes.Service.Modules.StartTimes.Handler
+namespace Startimes.Service.Modules.StartTimes.Interface
 {
     public interface IRechargeService
     {

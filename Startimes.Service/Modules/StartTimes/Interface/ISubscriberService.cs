@@ -1,5 +1,5 @@
 ﻿using RPNL.Net.Utilities.ResponseUtil;
-using Startimes.Data.DataObjects.Startimes.Subscriber;
+using Startimes.Data.DataObjects.Subscriber;
 
 namespace Startimes.Service.Modules.StartTimes.Interface
 {

@@ -14,6 +14,7 @@ namespace Startimes.Service.Modules
             services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<ISubscriberService, SubscriberService>();
             services.AddScoped<IRechargeService, RechargeService>();
+            services.AddScoped<IPartnerService, PartnerService>();
         }
     }
 }

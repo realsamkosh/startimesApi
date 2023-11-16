@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RPNL.Net.Utilities.ResponseUtil;
-using Startimes.Data.DataObjects.Startimes.Recharge;
-using Startimes.Service.Modules.StartTimes.Handler;
+using Startimes.Data.DataObjects.Recharge;
+using Startimes.Service.Modules.StartTimes.Interface;
 
 namespace Startimes.Api.Controllers
 {
