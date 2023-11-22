@@ -52,6 +52,27 @@
                 case "overdue_the_change_times":
                     message = "Times for replacement package exceeds the maximum value for the month";
                     break;
+                case "1001":
+                    message = "This Transaction serial number already exists";
+                    break;
+                case "1002":
+                    message = "The Subscription specification does not exist";
+                    break;
+                case "1003":
+                    message = "This transaction serial number is being processed";
+                    break;
+                case "1004":
+                    message = "the currency code is not supported in this transaction";
+                    break;
+                case "1005":
+                    message = "msisdn wrong format";
+                    break;
+                case "1006":
+                    message = "Incorrect amount format";
+                    break;
+                case "1101":
+                    message = "The phone number is wrong";
+                    break;
                 default:
                     break;
             }

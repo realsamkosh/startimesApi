@@ -5,5 +5,6 @@ namespace Startimes.Data.DataObjects
     public class GlobalConfig
     {
         public StartimeSettings? StartimeSettings { get; set; }
+        public BusinessSettings? BusinessSettings { get; set; }
     }
 }
